@@ -1,0 +1,12 @@
+Port {{ config.port }}
+Protocol 2
+
+PermitRootLogin no
+PubkeyAuthentication yes
+PasswordAuthentication no
+ChallengeResponseAuthentication no
+UsePAM yes
+
+SyslogFacility AUTHPRIV
+AllowUsers {{ config.user }}
+PidFile {{ config.pidfile }}

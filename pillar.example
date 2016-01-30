@@ -1,0 +1,16 @@
+gitlab:
+  url: http://localhost
+  config:
+    user:
+      git_user_email: gitlab@example.com
+    gitlab_rails:
+      gitlab_email_from: noreply@example.com
+      gitlab_default_projects_features_issues: False
+      omniauth_enabled: True
+      omniauth_providers: |
+        [{
+          name => google_oauth2,
+          app_id => example_app_id,
+          app_secret => example_app_secret,
+          args => { access_type => offline, approval_prompt =>  }
+        }]
