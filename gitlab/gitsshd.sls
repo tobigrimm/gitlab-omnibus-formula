@@ -1,5 +1,5 @@
 {% from "gitlab/map.jinja" import gitlab with context %}
-{% set is_selinux_enabled = salt.cmd.retcode('selinuxenabled') == 0 %}
+{% from "selinux/map.jinja" import selinux with context %}
 
 gitsshd:
   file.managed:
@@ -29,10 +29,9 @@ gitsshd-config:
     - defaults:
         config: {{ gitlab.gitsshd }}
 
-{% if is_selinux_enabled %}
-policycoreutils-python:
-  pkg.installed:
-    - name: policycoreutils-python
+{% if selinux.enabled %}
+include:
+  - selinux
 
 gitsshd-selinux-pid:
   cmd.run:
