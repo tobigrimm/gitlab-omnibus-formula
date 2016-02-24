@@ -1,12 +1,2 @@
-{% set gitlab = salt['grains.filter_by']({
-  'RedHat': {
-    'url': 'http://gitlab.example.com',
-    'config_file': '/etc/gitlab/gitlab.rb',
-    'gitsshd': {
-      'pidfile': '/var/run/gitsshd.pid',
-      'user': 'git',
-      'port': 22448
-    },
-    'config': {}
-  }
-}, merge=salt['pillar.get']('gitlab')) %}
+{% import_yaml 'gitlab/defaults.yaml' as default_settings %}
+{% set gitlab = salt['pillar.get']('gitlab', default=default_settings.get('gitlab'), merge=True) %}

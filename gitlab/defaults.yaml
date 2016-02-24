@@ -1,0 +1,7 @@
+gitlab:
+  url: http://gitlab.example.com
+  config_file: /etc/gitlab/gitlab.rb
+  gitsshd:
+    pidfile: /var/run/gitsshd.pid
+    user: git
+    port: 22448
