@@ -12,7 +12,7 @@ gitlab-deps:
 gitlab-repo:
   pkgrepo.managed:
     - humanname: gitlab_gitlab-ce
-    - baseurl: https://packages.gitlab.com/gitlab/gitlab-ce/el/7/$basearch
+    - baseurl: https://packages.gitlab.com/gitlab/gitlab-ce/el/$releasever/$basearch
     - gpgcheck: 0
     - gpgkey: https://packages.gitlab.com/gpg.key
     - require:
