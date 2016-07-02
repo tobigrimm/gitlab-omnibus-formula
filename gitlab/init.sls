@@ -32,12 +32,6 @@ gitlab:
       - cmd: gitlab-upgrade
       - cmd: gitlab-reconfigure
 
-{% if gitlab.config.get('gitlab_shell', {}).get('git_annex_enabled', false) %}
-gitlab-annex:
-  pkg.latest:
-    - name: git-annex
-{% endif %}
-
 gitlab-url:
   file.replace:
     - name: {{ gitlab.config_file }}
