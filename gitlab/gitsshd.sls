@@ -43,7 +43,7 @@ gitsshd-selinux-pid:
       - service: gitsshd
 
 gitsshd-selinux-port:
-  cmd.shell:
+  cmd.run:
     - name: semanage port -a -t ssh_port_t -p tcp {{ gitlab.gitsshd.port }}
     - unless: semanage port --list | grep ssh_port_t | grep {{ gitlab.gitsshd.port }}
     - require:

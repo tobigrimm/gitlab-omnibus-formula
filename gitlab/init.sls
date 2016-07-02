@@ -40,8 +40,6 @@ gitlab-url:
     - append_if_not_found: True
     - require:
       - pkg: gitlab
-    - watch_in:
-      - cmd: gitlab-reconfigure
 
 gitlab-config:
   file.blockreplace:
@@ -66,15 +64,16 @@ gitlab-config-{{ section }}-{{ key }}:
 {% endfor %}
 
 gitlab-upgrade:
-  cmd.wait:
+  cmd.run:
     - name: gitlab-ctl upgrade
-    - watch:
+    - onchanges:
       - pkg: gitlab
 
 gitlab-reconfigure:
-  cmd.wait:
+  cmd.run:
     - name: gitlab-ctl reconfigure
     - require:
       - pkg: gitlab
-    - watch:
+    - onchanges:
       - file: gitlab-config
+      - file: gitlab-url
