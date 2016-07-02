@@ -8,4 +8,4 @@ install:
   - gitshelf install
 
 script:
-  - travis_wait 30 kitchen test
+  - kitchen test

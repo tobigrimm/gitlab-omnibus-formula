@@ -34,7 +34,7 @@ include:
   - selinux
 
 gitsshd-selinux-pid:
-  cmd.run:
+  cmd.shell:
     - name: semanage fcontext -a -t sshd_var_run_t '{{ gitlab.gitsshd.pidfile }}'
     - unless: semanage fcontext --list | grep '{{ gitlab.gitsshd.pidfile }}' | grep sshd_var_run_t
     - require:
@@ -43,7 +43,7 @@ gitsshd-selinux-pid:
       - service: gitsshd
 
 gitsshd-selinux-port:
-  cmd.run:
+  cmd.shell:
     - name: semanage port -a -t ssh_port_t -p tcp {{ gitlab.gitsshd.port }}
     - unless: semanage port --list | grep ssh_port_t | grep {{ gitlab.gitsshd.port }}
     - require:

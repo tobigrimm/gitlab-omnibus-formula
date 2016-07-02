@@ -48,8 +48,8 @@ gitlab-config:
     - name: {{ gitlab.config_file }}
     - prepend_if_not_found: True
 
-{% for section, val in gitlab.config|dictsort %}
-{% for key, value in val|dictsort %}
+{% for section, val in gitlab.config.items() %}
+{% for key, value in val.items() %}
 gitlab-config-{{ section }}-{{ key }}:
   file.accumulated:
     - name: gitlab-config-accumulator

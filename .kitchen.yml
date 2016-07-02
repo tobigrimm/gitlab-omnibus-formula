@@ -12,6 +12,7 @@ provisioner:
   name: salt_solo
   formula: gitlab
   vendor_path: srv/salt
+  log_level: info
   pillars-from-files:
     gitlab.sls: pillar.example
   pillars:
