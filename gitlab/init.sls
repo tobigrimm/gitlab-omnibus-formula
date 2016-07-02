@@ -69,9 +69,10 @@ gitlab-upgrade:
     - onchanges:
       - pkg: gitlab
 
+# gitlab does not initialize the service, if a docker-environment is detected
 gitlab-reconfigure:
   cmd.run:
-    - name: gitlab-ctl reconfigure
+    - name: rm -f /.dockerenv && gitlab-ctl reconfigure
     - require:
       - pkg: gitlab
     - onchanges:
