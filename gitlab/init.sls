@@ -19,7 +19,7 @@ gitlab-repo:
       - cmd: gitlab-repo-key
 
 gitlab:
-  pkg.latest:
+  pkg.installed:
     - name: gitlab-ce
     - require:
       - pkgrepo: gitlab-repo
