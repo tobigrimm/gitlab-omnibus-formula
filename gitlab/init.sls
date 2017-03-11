@@ -41,6 +41,17 @@ gitlab-url:
     - require:
       - pkg: gitlab
 
+{% if 'registry_external_url' in gitlab %}
+docker-registry-url:
+  file.replace:
+    - name: {{ gitlab.config_file }}
+    - pattern: ^#?\s*registry_external_url\s.*$
+    - repl: registry_external_url {{ gitlab.registry_external_url|yaml_dquote }}
+    - append_if_not_found: True
+    - require:
+      - pkg: gitlab
+{% endif %}
+
 {% if 'mattermost_url' in gitlab %}
 mattermost-url:
   file.replace:
@@ -51,7 +62,6 @@ mattermost-url:
     - require:
       - pkg: gitlab
 {% endif %}
-
 
 gitlab-config:
   file.blockreplace:
