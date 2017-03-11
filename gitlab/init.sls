@@ -63,6 +63,26 @@ mattermost-url:
       - pkg: gitlab
 {% endif %}
 
+{% if 'pki' in gitlab %}
+gitlab-ssl-cert:
+  file.managed:
+    - name: {{ gitlab.pki.certificate_file }}
+    - mode: 600
+    - source: salt://gitlab/files/file_template
+    - template: jinja
+    - context:
+        content: {{ gitlab.pki.certificate|yaml_encode }}
+
+gitlab-ssl-key:
+  file.managed:
+    - name: {{ gitlab.pki.key_file }}
+    - mode: 600
+    - source: salt://gitlab/files/file_template
+    - template: jinja
+    - context:
+        content: {{ gitlab.pki.key|yaml_encode }}
+{% endif %}
+
 gitlab-config:
   file.blockreplace:
     - name: {{ gitlab.config_file }}
