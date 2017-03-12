@@ -57,7 +57,7 @@ mattermost-url:
   file.replace:
     - name: {{ gitlab.config_file }}
     - pattern: ^#?\s*mattermost_external_url\s.*$
-    - repl: external_url {{ gitlab.mattermost_url|yaml_dquote }}
+    - repl: mattermost_external_url {{ gitlab.mattermost_url|yaml_dquote }}
     - append_if_not_found: True
     - require:
       - pkg: gitlab
@@ -72,6 +72,8 @@ gitlab-ssl-cert:
     - template: jinja
     - context:
         content: {{ gitlab.pki.certificate|yaml_encode }}
+    - require:
+      - pkg: gitlab
 
 gitlab-ssl-key:
   file.managed:
@@ -81,6 +83,8 @@ gitlab-ssl-key:
     - template: jinja
     - context:
         content: {{ gitlab.pki.key|yaml_encode }}
+    - require:
+      - pkg: gitlab
 {% endif %}
 
 gitlab-config:
