@@ -41,17 +41,51 @@ gitlab-url:
     - require:
       - pkg: gitlab
 
-{% if 'mattermost_url' in gitlab %}
-mattermost-url:
+{% if 'registry_external_url' in gitlab %}
+docker-registry-url:
   file.replace:
     - name: {{ gitlab.config_file }}
-    - pattern: ^#?\s*mattermost_external_url\s.*$
-    - repl: external_url {{ gitlab.mattermost_url|yaml_dquote }}
+    - pattern: ^#?\s*registry_external_url\s.*$
+    - repl: registry_external_url {{ gitlab.registry_external_url|yaml_dquote }}
     - append_if_not_found: True
     - require:
       - pkg: gitlab
 {% endif %}
 
+{% if 'mattermost_url' in gitlab %}
+mattermost-url:
+  file.replace:
+    - name: {{ gitlab.config_file }}
+    - pattern: ^#?\s*mattermost_external_url\s.*$
+    - repl: mattermost_external_url {{ gitlab.mattermost_url|yaml_dquote }}
+    - append_if_not_found: True
+    - require:
+      - pkg: gitlab
+{% endif %}
+
+{% if 'pki' in gitlab %}
+gitlab-ssl-cert:
+  file.managed:
+    - name: {{ gitlab.pki.certificate_file }}
+    - mode: 600
+    - source: salt://gitlab/files/file_template
+    - template: jinja
+    - context:
+        content: {{ gitlab.pki.certificate|yaml_encode }}
+    - require:
+      - pkg: gitlab
+
+gitlab-ssl-key:
+  file.managed:
+    - name: {{ gitlab.pki.key_file }}
+    - mode: 600
+    - source: salt://gitlab/files/file_template
+    - template: jinja
+    - context:
+        content: {{ gitlab.pki.key|yaml_encode }}
+    - require:
+      - pkg: gitlab
+{% endif %}
 
 gitlab-config:
   file.blockreplace:

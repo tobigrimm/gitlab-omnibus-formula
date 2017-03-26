@@ -14,3 +14,13 @@ gitlab:
           "app_secret" => "example_app_secret",
           "args" => { "access_type" => "offline", "approval_prompt" => "" }
         }]
+  pki:
+    certificate: |
+      -----BEGIN CERTIFICATE-----
+      ..
+      -----END CERTIFICATE-----
+    key: |
+      -----BEGIN RSA PRIVATE KEY-----
+      ...
+      -----END RSA PRIVATE KEY-----
+

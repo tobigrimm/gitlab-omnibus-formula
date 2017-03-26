@@ -5,3 +5,6 @@ gitlab:
     pidfile: /var/run/gitsshd.pid
     user: git
     port: 22448
+  pki:
+    certificate_file: /etc/gitlab/ssl.crt
+    key_file: /etc/gitlab/ssl.key
