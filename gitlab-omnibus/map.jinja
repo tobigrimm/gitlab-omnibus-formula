@@ -1,2 +1,2 @@
-{% import_yaml 'gitlab/defaults.yaml' as default_settings %}
+{% import_yaml 'gitlab-omnibus/defaults.yaml' as default_settings %}
 {% set gitlab = salt['pillar.get']('gitlab', default=default_settings.get('gitlab'), merge=True) %}

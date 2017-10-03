@@ -1,10 +1,10 @@
-{% from "gitlab/map.jinja" import gitlab with context %}
+{% from "gitlab-omnibus/map.jinja" import gitlab with context %}
 {% from "selinux/map.jinja" import selinux with context %}
 
 gitsshd:
   file.managed:
     - name: /etc/systemd/system/gitsshd.service
-    - source: salt://gitlab/files/gitsshd.service
+    - source: salt://gitlab-omnibus/files/gitsshd.service
 
   module.wait:
     - name: service.systemctl_reload
@@ -22,7 +22,7 @@ gitsshd-config:
   file.managed:
     - name: /etc/ssh/gitsshd_config
     - template: jinja
-    - source: salt://gitlab/files/gitsshd_config
+    - source: salt://gitlab-omnibus/files/gitsshd_config
     - user: root
     - group: root
     - mode: 600

@@ -1,11 +1,11 @@
-==============
-gitlab-formula
-==============
+======================
+gitlab-omnibus-formula
+======================
 
-.. image:: https://travis-ci.org/corux/gitlab-formula.svg?branch=master
-    :target: https://travis-ci.org/corux/gitlab-formula
+.. image:: https://travis-ci.org/corux/gitlab-omnibus-formula.svg?branch=master
+    :target: https://travis-ci.org/corux/gitlab-omnibus-formula
 
-Installs the GitLab CE server.
+Installs the GitLab CE server from the Omnibus package.
 
 Available states
 ================
@@ -13,17 +13,17 @@ Available states
 .. contents::
     :local:
 
-``gitlab``
-------------
+``gitlab-omnibus``
+------------------
 
 Installs the GitLab CE server from the Omnibus packages.
 
-``gitlab.gitsshd``
-------------
+``gitlab-omnibus.gitsshd``
+--------------------------
 
 Sets up a SSH Server configuration, which allows only the git user to connect.
 
-``gitlab.runner``
-------------
+``gitlab-omnibus.runner``
+-------------------------
 
 Setup the GitLab CI runner.

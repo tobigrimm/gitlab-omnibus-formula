@@ -1,4 +1,4 @@
-{% from "gitlab/map.jinja" import gitlab with context %}
+{% from "gitlab-omnibus/map.jinja" import gitlab with context %}
 
 include:
   - .repo
