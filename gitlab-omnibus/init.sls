@@ -1,22 +1,35 @@
 {% from "gitlab-omnibus/map.jinja" import gitlab with context %}
 
+{%- if grains.os_family == 'RedHat' %}
 include:
   - .repo
+{%- endif %}
 
 gitlab-deps:
   pkg.installed:
     - pkgs:
+      {%- if grains.os_family == 'Debian' %}
+      - python-apt
+      - apt-transport-https
+      {%- elif grains.os_family == 'RedHat' %}
       - crontabs
       - policycoreutils-python
+      {%- endif %}
 
 gitlab-repo:
   pkgrepo.managed:
-    - humanname: gitlab_gitlab-ce
+    - humanname: Gitlab CE Repository
+    {%- if grains.os_family == 'Debian' %}
+    - name: deb https://packages.gitlab.com/gitlab/gitlab-ce/{{ grains.os|lower }} {{ grains.oscodename }} main
+    - file: /etc/apt/sources.list.d/gitlab_ce.list
+    - key_url: https://packages.gitlab.com/gpg.key
+    {%- elif grains.os_family == 'RedHat' %}
     - baseurl: https://packages.gitlab.com/gitlab/gitlab-ce/el/$releasever/$basearch
     - gpgcheck: 0
     - gpgkey: https://packages.gitlab.com/gpg.key
     - require:
       - cmd: gitlab-repo-key
+    {%- endif %}
 
 gitlab:
   pkg.installed:
