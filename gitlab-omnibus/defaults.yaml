@@ -1,6 +1,7 @@
 gitlab:
   url: http://gitlab.example.com
   config_file: /etc/gitlab/gitlab.rb
+  secrets_file: /etc/gitlab/gitlab-secrets.json
   gpgkey_url: https://packages.gitlab.com/gpg.key
   gitsshd:
     pidfile: /var/run/gitsshd.pid

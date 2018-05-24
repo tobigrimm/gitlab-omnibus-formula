@@ -31,6 +31,21 @@ gitlab-repo:
       - cmd: gitlab-repo-key
     {%- endif %}
 
+{% if 'secrets' in gitlab %}
+gitlab-secrets:
+  file.serialize:
+    - name: {{ gitlab.secrets_file }}
+    - dataset_pillar: gitlab:secrets
+    - formatter: json
+    - makedirs: True
+    - mode: 0600
+    - merge_if_exists: True
+    - require:
+      - pkg: gitlab
+    - require_in:
+      - service: gitlab
+{% endif %}
+
 gitlab:
   pkg.installed:
     - name: gitlab-ce
