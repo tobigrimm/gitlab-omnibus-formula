@@ -22,11 +22,11 @@ gitlab-repo:
     {%- if grains.os_family == 'Debian' %}
     - name: deb https://packages.gitlab.com/gitlab/gitlab-ce/{{ grains.os|lower }} {{ grains.oscodename }} main
     - file: /etc/apt/sources.list.d/gitlab_ce.list
-    - key_url: https://packages.gitlab.com/gpg.key
+    - key_url: {{ gitlab.gpgkey_url }}
     {%- elif grains.os_family == 'RedHat' %}
     - baseurl: https://packages.gitlab.com/gitlab/gitlab-ce/el/$releasever/$basearch
     - gpgcheck: 0
-    - gpgkey: https://packages.gitlab.com/gpg.key
+    - gpgkey: {{ gitlab.gpgkey_url }}
     - require:
       - cmd: gitlab-repo-key
     {%- endif %}

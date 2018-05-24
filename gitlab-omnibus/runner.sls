@@ -1,3 +1,5 @@
+{% from "gitlab-omnibus/map.jinja" import gitlab with context %}
+
 {%- if grains.os_family == 'RedHat' %}
 include:
   - .repo
@@ -31,13 +33,13 @@ gitlab-runner-repo:
     {%- if grains.os_family == 'Debian' %}
     - name: deb https://packages.gitlab.com/runner/gitlab-runner/{{ grains.os|lower }} {{ grains.oscodename }}
     - file: /etc/apt/sources.list.d/gitlab_runner.list
-    - key_url: https://packages.gitlab.com/gpg.key
+    - key_url: {{ gitlab.gpgkey_url }}
     - require:
       - file: gitlab-runner-preference
     {%- elif grains.os_family == 'RedHat' %}
     - baseurl: https://packages.gitlab.com/runner/gitlab-ci-multi-runner/el/$releasever/$basearch
     - gpgcheck: 0
-    - gpgkey: https://packages.gitlab.com/gpg.key
+    - gpgkey: {{ gitlab.gpgkey_url }}
     - require:
       - cmd: gitlab-repo-key
     {%- endif %}
