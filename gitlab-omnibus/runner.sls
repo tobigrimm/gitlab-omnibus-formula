@@ -37,7 +37,7 @@ gitlab-runner-repo:
     - require:
       - file: gitlab-runner-preference
     {%- elif grains.os_family == 'RedHat' %}
-    - baseurl: https://packages.gitlab.com/runner/gitlab-ci-multi-runner/el/$releasever/$basearch
+    - baseurl: https://packages.gitlab.com/runner/gitlab-runner/el/$releasever/$basearch
     - gpgcheck: 0
     - gpgkey: {{ gitlab.gpgkey_url }}
     - require:
