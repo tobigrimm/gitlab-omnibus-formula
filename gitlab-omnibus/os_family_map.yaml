@@ -1,0 +1,11 @@
+RedHat:
+  gitlab:
+    dependencies:
+      - crontabs
+      - policycoreutils-python
+Debian:
+  gitlab:
+    dependencies:
+      - python-apt
+      - apt-transport-https
+

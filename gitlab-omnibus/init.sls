@@ -1,20 +1,11 @@
 {% from "gitlab-omnibus/map.jinja" import gitlab with context %}
 
-{%- if grains.os_family == 'RedHat' %}
 include:
   - .repo
-{%- endif %}
 
 gitlab-deps:
   pkg.installed:
-    - pkgs:
-      {%- if grains.os_family == 'Debian' %}
-      - python-apt
-      - apt-transport-https
-      {%- elif grains.os_family == 'RedHat' %}
-      - crontabs
-      - policycoreutils-python
-      {%- endif %}
+    - pkgs: {{ gitlab.dependencies }}
 
 gitlab-repo:
   pkgrepo.managed:

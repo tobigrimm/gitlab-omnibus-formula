@@ -1,2 +1,4 @@
 {% import_yaml 'gitlab-omnibus/defaults.yaml' as default_settings %}
+{% import_yaml 'gitlab-omnibus/os_family_map.yaml' as os_family_map %}
+{% set default_settings = salt['grains.filter_by'](os_family_map, grain='os_family', merge=default_settings) %}
 {% set gitlab = salt['pillar.get']('gitlab', default=default_settings.get('gitlab'), merge=True) %}
