@@ -27,7 +27,7 @@ gitsshd-config:
     - group: root
     - mode: 600
     - defaults:
-        config: {{ gitlab.gitsshd }}
+        config: {{ gitlab.gitsshd|json }}
 
 {% if selinux.enabled %}
 include:
@@ -58,3 +58,4 @@ gitsshd-selinux-restorecon:
     - watch:
       - cmd: gitsshd-selinux-pid
 {% endif %}
+

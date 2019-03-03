@@ -5,7 +5,7 @@ include:
 
 gitlab-deps:
   pkg.installed:
-    - pkgs: {{ gitlab.dependencies }}
+    - pkgs: {{ gitlab.dependencies|json }}
 
 gitlab-repo:
   pkgrepo.managed:
@@ -141,3 +141,4 @@ gitlab-reconfigure:
     - onchanges:
       - file: gitlab-config
       - file: gitlab-url
+

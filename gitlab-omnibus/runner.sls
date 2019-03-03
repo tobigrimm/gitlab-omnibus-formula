@@ -5,7 +5,7 @@ include:
 
 gitlab-runner-deps:
   pkg.installed:
-    - pkgs: {{ gitlab.dependencies }}
+    - pkgs: {{ gitlab.dependencies|json }}
 
 {%- if grains.os_family == 'Debian' %}
 gitlab-runner-preference:
@@ -41,3 +41,4 @@ gitlab-runner:
     - require:
       - pkgrepo: gitlab-runner-repo
       - pkg: gitlab-runner-deps
+
