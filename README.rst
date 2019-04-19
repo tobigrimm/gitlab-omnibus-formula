@@ -27,3 +27,17 @@ Sets up a SSH Server configuration, which allows only the git user to connect.
 -------------------------
 
 Setup the GitLab CI runner.
+
+
+Configuration
+=============
+
+Configuration happens via a pillar, see example.pillar for basic usage.
+You can add additional key/value configuration items for gitlab.rb into the pillar, for example 
+to configure letsencrypt:
+::
+       letsencrypt:
+         enable: True
+         contact_emails: "email@domain"
+                   
+
